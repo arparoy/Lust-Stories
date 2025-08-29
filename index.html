@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lust Stories (2018) – Download</title>
+<style>
+:root {
+  --bg1:#0f0f1a; --bg2:#1b1d30;
+  --accent:#7aa2f7; --accent2:#c678dd;
+  --text:#eaeefc; --muted:#a9afc9;
+  --glass:rgba(255,255,255,0.08); --border:rgba(255,255,255,0.2);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Segoe UI",Roboto,sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);line-height:1.6;
+}
+.container{max-width:960px;margin:auto;padding:16px}
+.card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:var(--radius);backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:0 8px 30px rgba(0,0,0,0.35);
+  margin-bottom:20px;padding:20px;
+}
+.banner{position:relative;height:280px;border-radius:var(--radius);overflow:hidden}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.65)}
+.banner h1{position:absolute;bottom:16px;left:16px;font-size:clamp(20px,4vw,36px);font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(122,162,247,0.15);border:1px solid rgba(122,162,247,0.4)}
+.slider{position:relative;height:260px;border-radius:var(--radius);overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
+.slide.active{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover}
+.nav{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 10px}
+.nav button{background:rgba(0,0,0,0.4);border:none;color:white;padding:8px 12px;border-radius:10px;cursor:pointer}
+.dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4)}
+.dot.active{background:linear-gradient(45deg,var(--accent),var(--accent2))}
+.download{text-align:center}
+button.download-btn{
+  margin-top:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#111;border:none;font-weight:700;cursor:pointer;border-radius:12px;padding:12px 20px;
+}
+button.download-btn[disabled]{opacity:.6;cursor:not-allowed}
+#countWrap{margin-top:10px;display:none}
+.count{font-weight:bold}
+@media(max-width:600px){.banner{height:200px}.slider{height:200px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="banner card">
+    <img src="banner.jpg" alt="Banner">
+    <h1>Lust Stories (2018)</h1>
+  </div>
+
+  <div class="card">
+    <h2>Details</h2>
+    <p><strong>Full Name:</strong> Lust Stories</p>
+    <p><strong>Language:</strong> Hindi</p>
+    <p><strong>Released:</strong> 2018 • <strong>Size:</strong> 3GB • <strong>Quality:</strong> 1080p WEB-DL</p>
+    <p><strong>Cast:</strong> Radhika Apte, Bhumi Pednekar, Kiara Advani, Vicky Kaushal</p>
+    <p><strong>Storyline:</strong> Four short films by four of India’s biggest directors exploring love, sex and relationships in modern India. Lust Stories is a 2018 Indian Hindi-language anthology film, consisting of four short film segments directed by Anurag Kashyap, Zoya Akhtar, Dibakar Banerjee, and Karan Johar and a sequel to the 2013 anthology film Bombay Talkies. Co-produced by Ronnie Screwvala and Ashi Dua, the film has an ensemble cast including Radhika Apte, Bhumi Pednekar, Kiara Advani, Manisha Koirala, Vicky Kaushal, Neil Bhoopalam, Neha Dhupia, Sanjay Kapoor, Jaideep Ahlawat, and Akash Thosar.</p>
+    <p><em>Nominated for 2 International Emmy Awards (2019).</em></p>
+    <div class="tags">
+      <span class="tag">Drama</span>
+      <span class="tag">Romance</span>
+      <span class="tag">Anthology</span>
+      <span class="tag">Netflix</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Screenshots</h2>
+    <div class="slider" id="slider">
+      <div class="nav">
+        <button id="prev">&#9664;</button>
+        <button id="next">&#9654;</button>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+
+  <div class="card download">
+    <h2>Download</h2>
+    <button id="downloadBtn" class="download-btn">Download</button>
+    <p id="countWrap">Starting in <span class="count" id="count">10</span>s…</p>
+    <div id="altLink" style="margin-top:10px;display:none;">
+      <a href="#" id="finalLink" style="color:var(--accent)">Click here if redirect fails</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* CONFIG */
+const IMG_COUNT=2;
+const DOWNLOAD_WAIT=10;
+const DOWNLOAD_URL="https://drive.google.com/drive/folders/12WlchwdigRsSo19wPTVhi4NR5qjtvwLJ";
+
+/* SLIDESHOW */
+const slider=document.getElementById("slider");
+const dotsWrap=document.getElementById("dots");
+let current=0,slides=[],dots=[],timer;
+
+for(let i=1;i<=IMG_COUNT;i++){
+  let s=document.createElement("div");s.className="slide";
+  let img=document.createElement("img");img.src=`${i}.jpg`;img.alt=`Screenshot ${i}`;
+  s.appendChild(img);slider.appendChild(s);slides.push(s);
+  let d=document.createElement("div");d.className="dot";
+  d.addEventListener("click",()=>show(i-1));dotsWrap.appendChild(d);dots.push(d);
+}
+function show(idx){slides.forEach((s,i)=>s.classList.toggle("active",i===idx));dots.forEach((d,i)=>d.classList.toggle("active",i===idx));current=idx;}
+function next(){show((current+1)%slides.length);}
+function prev(){show((current-1+slides.length)%slides.length);}
+document.getElementById("next").onclick=()=>{next();resetTimer();}
+document.getElementById("prev").onclick=()=>{prev();resetTimer();}
+function startTimer(){timer=setInterval(next,4000);}
+function resetTimer(){clearInterval(timer);startTimer();}
+if(slides.length){show(0);startTimer();}
+
+/* DOWNLOAD */
+const btn=document.getElementById("downloadBtn");
+const countEl=document.getElementById("count");
+const countWrap=document.getElementById("countWrap");
+const finalLink=document.getElementById("finalLink");
+const altLink=document.getElementById("altLink");
+
+btn.onclick=()=>{
+  btn.disabled=true;
+  countWrap.style.display="block";
+  let remain=DOWNLOAD_WAIT;
+  countEl.textContent=remain;
+  let iv=setInterval(()=>{
+    remain--;
+    countEl.textContent=remain;
+    if(remain<=0){
+      clearInterval(iv);
+      window.location.href=DOWNLOAD_URL;
+      finalLink.href=DOWNLOAD_URL;
+      altLink.style.display="block";
+      btn.textContent="Starting…";
+    }
+  },1000);
+};
+</script>
+</body>
+</html>
